@@ -1,0 +1,10 @@
+{
+  "name": "snake-game",
+  "version": "1.0.0",
+  "description": "Snake in a canvas, with the game logic split out and unit tested.",
+  "type": "module",
+  "private": true,
+  "scripts": { "test": "node --test", "start": "python3 -m http.server 8080" },
+  "author": "Umer Hashmi",
+  "license": "MIT"
+}

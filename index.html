@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snake</title>
+  <meta name="description" content="Snake in a canvas: keyboard, touch swipes, wrap mode and a saved high score.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2316a34a'/><rect x='7' y='14' width='14' height='4' rx='2' fill='white'/><circle cx='24' cy='16' r='3' fill='%23fbbf24'/></svg>">
+  <link rel="stylesheet" href="src/base.css">
+  <link rel="stylesheet" href="src/app.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Snake</h1>
+        <p>Arrow keys or WASD. Swipe on a phone. Space pauses.</p>
+      </div>
+      <a href="https://github.com/umer-78/snake-game">Source on GitHub</a>
+    </header>
+
+    <div class="hud">
+      <span>Score <b id="score">0</b></span>
+      <span>Best <b id="best">0</b></span>
+      <span>Length <b id="length">3</b></span>
+      <label class="toggle"><input type="checkbox" id="wrap"> Wrap at the edges</label>
+      <button id="restart" class="primary">New game</button>
+    </div>
+
+    <div class="stage">
+      <canvas id="board" width="600" height="600" aria-label="Snake board"></canvas>
+      <div class="overlay" id="overlay" hidden><div><p id="overlayText"></p><p class="fine">Press space or tap to play</p></div></div>
+    </div>
+
+    <div class="pad" aria-hidden="false">
+      <button data-dir="up" aria-label="Up">↑</button>
+      <div>
+        <button data-dir="left" aria-label="Left">←</button>
+        <button data-dir="down" aria-label="Down">↓</button>
+        <button data-dir="right" aria-label="Right">→</button>
+      </div>
+    </div>
+
+    <footer>Game rules live in <code>src/game.js</code> with 14 unit tests. Built by <a href="https://github.com/umer-78">Umer Hashmi</a>.</footer>
+  </div>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
