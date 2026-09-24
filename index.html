@@ -274,6 +274,10 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <main id="main">
+
   <div class="wrap">
     <header class="top">
       <div class="brand">
@@ -293,7 +297,7 @@
       <span class="hud-stat">Best <b id="best">0</b></span>
       <span class="hud-stat">Length <b id="length">3</b></span>
       <label class="toggle"><input type="checkbox" id="wrap"> Wrap at the edges</label>
-      <button id="restart" class="primary">New game</button>
+      <button id="restart" class="primary" type="button">New game</button>
     </div>
 
     <div class="stage animate-in delay-2">
@@ -302,16 +306,18 @@
     </div>
 
     <div class="pad animate-in delay-3" aria-hidden="false">
-      <button data-dir="up" aria-label="Up">↑</button>
+      <button data-dir="up" aria-label="Up" type="button">↑</button>
       <div>
-        <button data-dir="left" aria-label="Left">←</button>
-        <button data-dir="down" aria-label="Down">↓</button>
-        <button data-dir="right" aria-label="Right">→</button>
+        <button data-dir="left" aria-label="Left" type="button">←</button>
+        <button data-dir="down" aria-label="Down" type="button">↓</button>
+        <button data-dir="right" aria-label="Right" type="button">→</button>
       </div>
     </div>
 
     <footer>Pure game rules in <code>src/game.js</code>, covered by 14 unit tests. Built by <a href="https://github.com/umer-78">Umer Hashmi</a> · <a href="https://github.com/umer-78/snake-game">Source on GitHub</a>.</footer>
   </div>
   <script type="module" src="src/app.js"></script>
-</body>
+
+  </main>
+  </body>
 </html>
