@@ -1,10 +1,13 @@
 {
   "name": "snake-game",
   "version": "1.0.0",
-  "description": "Snake in a canvas, with the game logic split out and unit tested.",
+  "description": "Snake on a canvas with the game rules separated from rendering and unit tested: wrap mode, queued turns, touch controls and a saved high score.",
   "type": "module",
   "private": true,
-  "scripts": { "test": "node --test", "start": "python3 -m http.server 8080" },
+  "scripts": {
+    "test": "node --test",
+    "start": "python3 -m http.server 8080"
+  },
   "author": "Umer Hashmi",
   "license": "MIT"
 }
