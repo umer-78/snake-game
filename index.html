@@ -162,7 +162,7 @@
     button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
 
     .hud {
-      display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+      display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
       padding: 12px 14px; margin-bottom: 14px;
       background: color-mix(in srgb, var(--surface) 85%, transparent);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -191,9 +191,10 @@
       width: auto; height: auto; padding: 0; border: none; background: none;
       box-shadow: none; accent-color: var(--accent); cursor: pointer;
     }
-    .hud #restart { margin-left: auto; }
+    .hud #pause { margin-left: auto; min-width: 72px; }
+    .hud #pause, .hud #restart { padding-left: 12px; padding-right: 12px; }
 
-    .stage { position: relative; }
+    .stage { position: relative; width: min(100%, calc(100vh - 440px)); min-width: min(100%, 320px); margin: 0 auto; }
     canvas {
       width: 100%; height: auto; aspect-ratio: 1; display: block;
       background: var(--surface);
@@ -202,22 +203,26 @@
     }
     .overlay {
       position: absolute; inset: 0; display: grid; place-items: center; text-align: center;
-      background: color-mix(in srgb, var(--bg) 72%, transparent);
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      background: color-mix(in srgb, var(--bg) 40%, transparent);
+      backdrop-filter: blur(1.5px); -webkit-backdrop-filter: blur(1.5px);
       border-radius: var(--radius-lg); cursor: pointer;
       animation: scaleIn 0.35s var(--ease) both;
     }
     .overlay p { margin: 0 0 6px; font-size: 22px; font-weight: 750; letter-spacing: -0.01em; }
-    .overlay .fine { margin: 0; font-size: 13px; font-weight: 500; color: var(--muted); }
+    .overlay > div {
+      padding: 22px 28px; border-radius: var(--radius);
+      background: var(--bg-elevated); border: 1px solid var(--border); box-shadow: var(--shadow-lg);
+    }
+    .overlay .fine { margin: 10px 0 0; font-size: 13px; font-weight: 500; color: var(--muted); }
+    .overlay .play { margin-top: 12px; padding: 10px 26px; font-size: 16px; }
 
-    .pad { display: none; margin-top: 16px; text-align: center; }
+    .pad { margin-top: 16px; text-align: center; }
     .pad > div { display: flex; gap: 8px; justify-content: center; margin-top: 8px; }
     .pad button {
       width: 64px; height: 48px; font-size: 20px; border-radius: 12px;
       background: var(--surface); box-shadow: var(--shadow-sm);
     }
     .pad button:active { transform: scale(0.94); }
-    @media (hover: none) { .pad { display: block; } }
 
     .card {
       background: color-mix(in srgb, var(--surface) 85%, transparent);
@@ -267,7 +272,7 @@
       header.top { padding: 16px 0; }
       header.top h1 { font-size: 20px; }
       .hud { padding: 10px; gap: 8px; }
-      .hud #restart { margin-left: 0; width: 100%; }
+      .hud #pause, .hud #restart { margin-left: 0; flex: 1; }
       .hud .toggle { order: 3; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -313,13 +318,14 @@
       <span class="hud-stat">Score <b id="score" aria-live="polite">0</b></span>
       <span class="hud-stat">Best <b id="best">0</b></span>
       <span class="hud-stat">Length <b id="length">3</b></span>
-      <label class="toggle"><input type="checkbox" id="wrap"> Wrap at the edges</label>
+      <label class="toggle"><input type="checkbox" id="wrap"> Wrap edges</label>
+      <button id="pause" type="button" aria-pressed="false">Play</button>
       <button id="restart" class="primary" type="button">New game</button>
     </div>
 
     <div class="stage animate-in delay-2">
       <canvas id="board" width="600" height="600" aria-label="Snake board"></canvas>
-      <div class="overlay" id="overlay" hidden><div><p id="overlayText"></p><p class="fine">Press Space or tap to play</p></div></div>
+      <div class="overlay" id="overlay" hidden><div><p id="overlayText"></p><button class="primary play" id="play" type="button">Play</button><p class="fine">or press Space · steer with arrow keys, WASD, swipes or the buttons below</p></div></div>
     </div>
 
     <div class="pad animate-in delay-3" aria-hidden="false">

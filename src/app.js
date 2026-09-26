@@ -12,10 +12,10 @@ const css = (name) => getComputedStyle(document.body).getPropertyValue(name).tri
 
 function draw() {
   const cell = canvas.width / game.width;
-  ctx.fillStyle = css('--surface');
+  ctx.fillStyle = css('--surface-2');
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.strokeStyle = css('--border');
+  ctx.strokeStyle = css('--border-strong');
   ctx.lineWidth = 1;
   for (let i = 1; i < game.width; i++) {
     ctx.beginPath();
@@ -32,7 +32,7 @@ function draw() {
   }
 
   game.snake.forEach((segment, i) => {
-    ctx.fillStyle = i === 0 ? css('--accent') : css('--accent');
+    ctx.fillStyle = css('--accent');
     ctx.globalAlpha = i === 0 ? 1 : Math.max(0.35, 1 - i / (game.snake.length + 4));
     const pad = i === 0 ? 1 : 2;
     ctx.fillRect(segment.x * cell + pad, segment.y * cell + pad, cell - pad * 2, cell - pad * 2);
@@ -62,11 +62,19 @@ function start() {
   hide();
   paused = false;
   timer = setTimeout(tick, game.interval);
+  syncPause();
 }
 
 function stop() {
   clearTimeout(timer);
   timer = null;
+  syncPause();
+}
+
+function syncPause() {
+  const running = timer !== null;
+  $('pause').textContent = running ? 'Pause' : (game.over ? 'Play again' : 'Play');
+  $('pause').setAttribute('aria-pressed', String(!running && paused));
 }
 
 const show = (text) => { $('overlayText').textContent = text; $('overlay').hidden = false; };
@@ -86,6 +94,7 @@ function togglePause() {
     paused = false;
     hide();
     timer = setTimeout(tick, game.interval);
+    syncPause();
     return;
   }
   paused = true;
@@ -107,7 +116,10 @@ window.addEventListener('keydown', (e) => {
 });
 
 document.querySelectorAll('.pad button').forEach((button) => {
-  button.addEventListener('click', () => game.turn(button.dataset.dir));
+  button.addEventListener('click', () => {
+    game.turn(button.dataset.dir);
+    if (!timer && !game.over) togglePause();   // a direction button also starts the game
+  });
 });
 
 let touchStart = null;
@@ -122,9 +134,11 @@ canvas.addEventListener('pointerup', (e) => {
 });
 
 $('restart').addEventListener('click', restart);
+$('pause').addEventListener('click', togglePause);
 $('wrap').addEventListener('change', restart);
 $('overlay').addEventListener('click', togglePause);
 document.addEventListener('visibilitychange', () => { if (document.hidden && timer) togglePause(); });
 
 draw();
 show('Snake');
+syncPause();
