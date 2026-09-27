@@ -1,6 +1,8 @@
 # Snake
 
 [![CI](https://github.com/umer-78/snake-game/actions/workflows/ci.yml/badge.svg)](https://github.com/umer-78/snake-game/actions/workflows/ci.yml)
+
+[![Snake: the live demo](.github/preview.jpg)](https://umer-78.github.io/snake-game/)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-f7df1e)
 ![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-green)
